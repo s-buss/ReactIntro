@@ -1,0 +1,82 @@
+﻿.bond-movielist {
+    margin: 10px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bond-movie {
+    padding: 4px;
+    font-family: "Calibri", "Arial";
+    font-size: 16px;
+
+    border-color: silver;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+}
+
+.bond-movie-hovered {
+    background-color: #F0F0F0;
+}
+
+.bond-movie-index {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+
+    background-color: white;
+    color: grey;
+    border-radius: 100px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: grey;
+}
+
+.bond-move-button {
+    width: 20px;
+    line-height: 20px;
+    cursor: pointer;
+
+    text-align:center;
+
+    margin-left: 4px;
+    font-size: 32px;
+}
+
+.bond-move-button:hover {
+    color: green;
+}
+
+.bond-movie-left {
+    display: table-cell;
+    vertical-align: middle;
+    padding-right: 6px;
+}
+
+.bond-movie-poster {
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 6px;
+}
+
+.bond-movie-body {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.bond-movie-title {
+    font-size: 18px;
+    font-weight: bold;    
+}
+
+.bond-movie-year {
+    color: #707070;
+}
+
+.bond-movie-overview {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #505050;
+}

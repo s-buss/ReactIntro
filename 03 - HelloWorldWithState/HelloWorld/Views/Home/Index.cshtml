@@ -1,0 +1,26 @@
+﻿@using System.Web.UI.WebControls
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hello World with React</title>
+
+    <link rel="stylesheet" href="~/Styles/HelloWorld.css">
+</head>
+<body>
+    @* This is the element where the React generated content goes.*@
+    <div id="react-container"></div>
+
+    @* React v0.14.3 with all addons. *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-with-addons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
+
+    @* Local scripts *@
+    <script src="~/Scripts/React/HelloWorld.jsx"></script>
+    <script src="~/Scripts/React/Main.jsx"></script>
+</body>
+</html>
