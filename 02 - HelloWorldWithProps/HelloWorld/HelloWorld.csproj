@@ -172,8 +172,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\React\HelloWorld.jsx" />
-    <Content Include="Scripts\React\Main.jsx" />
+    <Content Include="Scripts\HelloWorld.jsx" />
+    <Content Include="Scripts\Main.jsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
