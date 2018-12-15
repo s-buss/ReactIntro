@@ -15,27 +15,6 @@
     border-width: 0 0 1px 0;
 }
 
-.bond-movie-index {
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    font-weight: bold;
-
-    background-color: white;
-    color: grey;
-    border-radius: 100px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: grey;
-}
-
-.bond-movie-left {
-    display: table-cell;
-    vertical-align: middle;
-    padding-right: 6px;
-}
-
 .bond-movie-poster {
     display: table-cell;
     vertical-align: top;

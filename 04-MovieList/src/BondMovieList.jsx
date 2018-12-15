@@ -4,14 +4,12 @@ import './BondMovieList.css';
 
 class BondMovie extends React.Component {
     render() {
-        var index = this.props.index;
         var movie = this.props.movie;
 
         return (
             <div className="bond-movie">
-                <div className="bond-movie-left"><div className="bond-movie-index">{index + 1}</div></div>
                 <div className="bond-movie-poster">
-                    <img src={movie.poster} />
+                    <img src={movie.poster} alt=""/>
                 </div>
                 <div className="bond-movie-body">
                     <div className="bond-movie-title">{movie.title} <span className="bond-movie-year">({movie.year})</span></div>
@@ -28,11 +26,8 @@ class BondMovieList extends React.Component {
 
         var movieList = this.props.movies;
         var movieElems = movieList.map(function (movie, index) {
-
-            var key = movie.year;
-
             return (
-              <BondMovie key={key} index={index} movie={movie}/> 
+              <BondMovie movie={movie}/> 
             );
         });
 
