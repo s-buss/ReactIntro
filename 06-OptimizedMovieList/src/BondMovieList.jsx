@@ -67,7 +67,7 @@ class BondMovie extends React.PureComponent {
 
         var movie = this.props.movie;
 
-        console.log(`${BondMovie.renderCounter++} Rendering Movie ${movie.title}`);
+        console.log(`${BondMovie.renderCounter++} Rendering Movie '${movie.title}'`);
 
         var className = "bond-movie";
         var buttonUp = undefined;
@@ -118,16 +118,16 @@ class BondMovieList extends React.Component {
     moveMovieUp(movie) {
         var index = this.state.movies.indexOf(movie);
 
-        this.moveMovie(index, index - 1);
+        this.swapMovies(index, index - 1);
     }
 
     moveMovieDown(movie) {
         var index = this.state.movies.indexOf(movie);
 
-        this.moveMovie(index, index + 1);
+        this.swapMovies(index, index + 1);
     }
 
-    moveMovie(oldIndex, newIndex) {
+    swapMovies(oldIndex, newIndex) {
 
         if (newIndex < 0 || newIndex >= this.state.movies.length) {
             return;
