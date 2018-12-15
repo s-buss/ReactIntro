@@ -4,11 +4,7 @@ import $ from 'jquery';
 
 import './BondMovieList.css';
 
-// Replace PureComponent here with Component and verify in the console window that then
-// the whole movie list is rendered after moving a movie up or down. With PureComponent
-// as base class, the system recognizes that most of the movie elements stay unchanged
-// and need no rendering.
-class BondMovie extends React.PureComponent {
+class BondMovie extends React.Component {
 
     constructor(props) {
         super(props);
@@ -20,6 +16,7 @@ class BondMovie extends React.PureComponent {
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.moveUp = this.moveUp.bind(this);
         this.moveDown = this.moveDown.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     handleMouseEnter() {
@@ -36,7 +33,7 @@ class BondMovie extends React.PureComponent {
         this._lastPos = $(ReactDOM.findDOMNode(this)).offset().top;
 
         // Let the parent move this entry to a new position.
-        this.props.onMove(this.props.index, this.props.index - 1);
+        this.props.onMoveUp(this.props.movie);
     }
 
     moveDown() {
@@ -44,7 +41,11 @@ class BondMovie extends React.PureComponent {
         this._lastPos = $(ReactDOM.findDOMNode(this)).offset().top;
 
         // Let the parent move this entry to a new position.
-        this.props.onMove(this.props.index, this.props.index + 1);
+        this.props.onMoveDown(this.props.movie);
+    }
+
+    delete() {
+        this.props.onDelete(this.props.movie);
     }
 
     // Will be called after rendering this component, but not after the initial rendering.
@@ -66,28 +67,30 @@ class BondMovie extends React.PureComponent {
 
         var movie = this.props.movie;
 
-        console.log(`Rendering Movie ${movie.title}`);
+        console.log(`${BondMovie.renderCounter++} Rendering Movie ${movie.title}`);
 
         var className = "bond-movie";
         var buttonUp = undefined;
         var buttonDown = undefined;
+        var buttonDelete = undefined;
         if (this.state.isHovered) {
             className = "bond-movie bond-movie-hovered";
             buttonUp = <div className="bond-move-button up" key="up" onClick={this.moveUp}><i className="fa fa-caret-up"></i></div>;
             buttonDown = <div className="bond-move-button down" key="down" onClick={this.moveDown}><i className="fa fa-caret-down"></i></div>;
+            buttonDelete = <div className="pull-right"><i className="fa fa-times bond-delete-button" onClick={this.delete}></i></div>;
         }
 
         return (
             <div className={className} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                 <div className="bond-movie-left">
                     {buttonUp}
-                    <div className="bond-movie-index">{this.props.index + 1}</div>
                     {buttonDown}
                 </div>
                 <div className="bond-movie-poster">
-                    <img src={movie.poster} />
+                    <img src={movie.poster} alt=""/>
                 </div>
                 <div className="bond-movie-body">
+                    {buttonDelete}
                     <div className="bond-movie-title">{movie.title} <span className="bond-movie-year">({movie.year})</span></div>
                     <div>Bond: {movie.bond}</div>
                     <div className="bond-movie-overview">{movie.overview}</div>
@@ -97,18 +100,35 @@ class BondMovie extends React.PureComponent {
     }
 }
 
-class BondMovieList extends React.PureComponent {
+BondMovie.renderCounter = 0;
 
+
+class BondMovieList extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = { movies: this.props.initialMovies };
 
-        this.moveMovie = this.moveMovie.bind(this);
+        this.moveMovieUp = this.moveMovieUp.bind(this);
+        this.moveMovieDown = this.moveMovieDown.bind(this);
+        this.deleteMovie = this.deleteMovie.bind(this);
+    }
+
+    moveMovieUp(movie) {
+        var index = this.state.movies.indexOf(movie);
+
+        this.moveMovie(index, index - 1);
+    }
+
+    moveMovieDown(movie) {
+        var index = this.state.movies.indexOf(movie);
+
+        this.moveMovie(index, index + 1);
     }
 
     moveMovie(oldIndex, newIndex) {
+
         if (newIndex < 0 || newIndex >= this.state.movies.length) {
             return;
         }
@@ -122,15 +142,22 @@ class BondMovieList extends React.PureComponent {
         this.setState({ movies: newList });
     }
 
+    deleteMovie(movie) {
+
+        var index = this.state.movies.indexOf(movie);
+
+        var newList = this.state.movies.slice(0);
+        newList.splice(index, 1);
+
+        this.setState({ movies: newList });
+    }
+
     render() {
 
         var movieList = this.state.movies;
-        var movieElems = movieList.map((movie, index) => {
-
-            var key = movie.year;
-
+        var movieElems = movieList.map(movie => {
             return (
-              <BondMovie key={key} index={index} movie={movie} onMove={this.moveMovie}/> 
+              <BondMovie movie={movie} onMoveUp={this.moveMovieUp} onMoveDown={this.moveMovieDown} onDelete={this.deleteMovie}/> 
             );
         });
 

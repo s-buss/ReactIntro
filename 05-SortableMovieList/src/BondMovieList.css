@@ -24,14 +24,6 @@
     height: 24px;
     line-height: 24px;
     text-align: center;
-    font-weight: bold;
-
-    background-color: white;
-    color: grey;
-    border-radius: 100px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: grey;
 }
 
 .bond-move-button {
@@ -49,16 +41,25 @@
     color: green;
 }
 
+.bond-delete-button {
+    color: gray;
+}
+
+.bond-delete-button:hover {
+    color: red;
+}
+
 .bond-movie-left {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: top;
+    width: 24px;
     padding-right: 6px;
 }
 
 .bond-movie-poster {
     display: table-cell;
     vertical-align: top;
-    padding-right: 6px;
+    padding-right: 10px;
 }
 
 .bond-movie-body {
